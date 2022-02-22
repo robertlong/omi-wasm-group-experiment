@@ -9,6 +9,8 @@ Robert Long - Matrix.org
 I'm still working on the implementation for this. But here's the general API I'm looking to produce in AssemblyScript:
 
 ```typescript
+// Collision events between a trigger and collider in a given frame can be queried via the `getEventQueue` function.
+// The event queue is drained as a result of running this function.
 getEventQueue(Physics, Physics.intersectionEvents): IntersectionEvent[]
 
 interface IntersectionEvent {
@@ -17,8 +19,14 @@ interface IntersectionEvent {
   intersecting: bool
 }
 
+// We've discussed the need to get references to well known entities in a glTF file or world that this script is ran inside.
+// The getEntityByName method gives you the first entity id with a matching name
 getEntityByName("Audio Emitter"): u32
 
+// Property stores are used for reading/writing entity data.
+// Each property is stored in linear memory allowing for better data locality
+// Implementations should use efficient copies into / out of the WASM memory or use shared memory
+// for optimal performance.
 getPropertyStoreBool(AudioEmitter, AudioEmitter.playing): bool[]
 getPropertyStoreVec3(Material, Material.color): vec3[]
 getPropertyStoreVec3(Transform, Transform.position): vec3[]
