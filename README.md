@@ -65,7 +65,7 @@ for (const event of intersectionEventQueue) {
   }
 }
 
-// Example 2: Transforms
+// Example 3: Transforms
 
 const spinningCubeEid = getEntityByName("Spinning Cube");
 const intersectionEventQueue = getEventQueue(Physics, Physics.intersectionEvents);
